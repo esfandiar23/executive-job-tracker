@@ -21,6 +21,7 @@ const SOURCES = ["Job Board", "Search Firm", "Referral", "Direct"];
 const ROLES = [
   "Infrastructure Architect",
   "Enterprise Architect",
+  "Cloud Architect",
   "IT Director",
   "AI Director",
   "CTO",
