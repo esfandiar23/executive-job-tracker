@@ -1,0 +1,18 @@
+{
+  "name": "tracker-app",
+  "version": "1.0.0",
+  "description": "Executive job search tracker - applications, recruiter CRM, job listings",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Executive Job Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+  <header class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between flex-wrap gap-2">
+    <div>
+      <h1 class="text-lg font-semibold">Executive Job Tracker</h1>
+      <p class="text-xs text-slate-400">Infrastructure Architect · EA · IT Director · AI Director · CTO · CIO · CISO</p>
+    </div>
+    <nav class="flex gap-2">
+      <button id="tab-applications" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium">Applications</button>
+      <button id="tab-listings" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium">Job Listings</button>
+      <button id="tab-recruiters" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium">Recruiters &amp; Firms</button>
+    </nav>
+  </header>
+
+  <main class="p-4 md:p-6">
+    <section id="view-applications">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex gap-2 text-sm">
+          <input id="search-box" placeholder="Search company or role..." class="border rounded-md px-3 py-1.5 w-64" />
+        </div>
+        <button id="btn-add-application" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-md">+ Add Application</button>
+      </div>
+      <div id="kanban" class="grid gap-3" style="grid-template-columns: repeat(6, minmax(220px, 1fr)); overflow-x: auto;"></div>
+    </section>
+
+    <section id="view-listings" class="hidden">
+      <div class="bg-white rounded-lg shadow p-4 mb-4">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <div>
+            <h2 class="text-base font-semibold">Job Listings</h2>
+            <p id="listings-subtext" class="text-xs text-slate-500">Pulled directly from company career pages · last 2 weeks · $200,000+ CAD target</p>
+          </div>
+          <button id="btn-refresh-listings" class="bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium px-4 py-2 rounded-md">Refresh Now</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-sm">
+          <input id="lf-search" placeholder="Title or company..." class="border rounded-md px-3 py-1.5 col-span-2" />
+          <select id="lf-role" class="border rounded-md px-3 py-1.5">
+            <option value="">All roles</option>
+          </select>
+          <select id="lf-country" class="border rounded-md px-3 py-1.5">
+            <option value="">All countries</option>
+          </select>
+          <input id="lf-minsalary" type="number" placeholder="Min salary (CAD)" value="200000" class="border rounded-md px-3 py-1.5" />
+          <select id="lf-sort" class="border rounded-md px-3 py-1.5">
+            <option value="date-desc">Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="salary-desc">Salary: high to low</option>
+            <option value="salary-asc">Salary: low to high</option>
+            <option value="company-asc">Company A-Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-left text-slate-500">
+            <tr>
+              <th class="px-4 py-2">Title</th>
+              <th class="px-4 py-2">Company</th>
+              <th class="px-4 py-2">Location</th>
+              <th class="px-4 py-2">Posted</th>
+              <th class="px-4 py-2">Salary</th>
+              <th class="px-4 py-2">Category</th>
+              <th class="px-4 py-2">Source</th>
+              <th class="px-4 py-2"></th>
+            </tr>
+          </thead>
+          <tbody id="listings-body"></tbody>
+        </table>
+        <div id="listings-empty" class="hidden text-center text-sm text-slate-500 py-10"></div>
+      </div>
+    </section>
+
+    <section id="view-recruiters" class="hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-semibold">Recruiters &amp; Search Firms</h2>
+        <button id="btn-add-recruiter" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-md">+ Add Recruiter</button>
+      </div>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50 text-left text-slate-500">
+            <tr>
+              <th class="px-4 py-2">Name</th>
+              <th class="px-4 py-2">Firm</th>
+              <th class="px-4 py-2">Email</th>
+              <th class="px-4 py-2">Phone</th>
+              <th class="px-4 py-2">Linked Applications</th>
+              <th class="px-4 py-2">Notes</th>
+              <th class="px-4 py-2"></th>
+            </tr>
+          </thead>
+          <tbody id="recruiters-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-root"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
